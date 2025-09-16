@@ -1,22 +1,24 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Quiz Ensino Médio</title>
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <div class="quiz-container">
     <h1>Quiz sobre o Ensino Médio 🎓</h1>
     <div id="quiz"></div>
-    <button id="next-btn">Próxima Pergunta</button>
+    <button id="next-btn" class="hide">Próxima Pergunta</button>
     <div id="result" class="hide">
       <h2>Sua Pontuação: <span id="score"></span>/12</h2>
       <p id="message"></p>
       <button onclick="location.reload()">Tentar Novamente</button>
     </div>
   </div>
+
+  <!-- ⚠️ IMPORTANTE: Coloque o script AQUI, após o DOM -->
   <script src="script.js"></script>
 </body>
 </html>
