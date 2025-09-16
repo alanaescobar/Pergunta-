@@ -7,17 +7,17 @@
   <style>
     body {
       font-family: Arial, sans-serif;
-      background-color: #002a57; /* azul */
+      background-color: #002a57;
       margin: 0; 
       padding: 0;
       display: flex;
       justify-content: center;
       align-items: center;
       height: 100vh;
-      color: rgb(0, 0, 0); /* texto branco para contraste */
+      color: rgb(0, 0, 0);
     }
     .quiz-container {
-      background: #ffffff; /* azul mais escuro para o container */
+      background: #ffffff;
       padding: 30px;
       border-radius: 10px;
       max-width: 600px;
@@ -29,12 +29,18 @@
     h1, h2 {
       margin-bottom: 20px;
     }
+    #timer {
+      font-size: 18px;
+      font-weight: bold;
+      margin-bottom: 20px;
+      color: #002a57;
+    }
     button {
       display: block;
       margin: 10px auto;
       padding: 10px 20px;
       font-size: 16px;
-      background-color: #002a55; /* azul claro */
+      background-color: #002a55;
       color: rgb(255, 255, 255);
       border: none;
       border-radius: 5px;
@@ -43,10 +49,10 @@
       transition: background-color 0.3s ease;
     }
     button:hover:not(:disabled) {
-      background-color: #000000; /* azul hover */
+      background-color: #000000;
     }
     button.answer {
-      background-color: rgb(0, 54, 107); /* azul intermediário */
+      background-color: rgb(0, 54, 107);
       color: rgba(243, 243, 243, 1);
       border: none;
       margin: 8px 0;
@@ -65,7 +71,7 @@
       display: none;
     }
     #result button {
-      background-color: #28a745; /* verde para tentar novamente */
+      background-color: #28a745;
     }
     #result button:hover {
       background-color: #218838;
@@ -76,6 +82,7 @@
 
   <div class="quiz-container">
     <h1>Quiz sobre o Ensino Médio 🎓</h1>
+    <p id="timer">⏳ Tempo restante: 7:00</p>
     <div id="quiz"></div>
     <button id="next-btn" class="hide">Próxima Pergunta</button>
 
@@ -88,116 +95,29 @@
 
   <script>
     const quizData = [
-      {
-        question: "Qual é a fórmula de Bhaskara?",
-        answers: ["x = (-b ± √(b² - 4ac)) / 2a", "x = b² - 4ac", "x = a² + b²", "x = a + b / c"],
-        correct: 0
-      },
-      {
-        question: "Quem proclamou a independência do Brasil?",
-        answers: ["Dom Pedro I", "Tiradentes", "Getúlio Vargas", "Dom João VI"],
-        correct: 0
-      },
-      {
-        question: "O que é um advérbio?",
-        answers: [
-          "Palavra que modifica um verbo, adjetivo ou outro advérbio",
-          "Palavra que nomeia objetos",
-          "Palavra que substitui o nome",
-          "Palavra que indica ação"
-        ],
-        correct: 0
-      },
-      {
-        question: "Qual é a capital do Tocantins?",
-        answers: ["Palmas", "Boa Vista", "Macapá", "Porto Velho"],
-        correct: 0
-      },
-      {
-        question: "Qual é a função principal dos ribossomos?",
-        answers: ["Produção de proteínas", "Respiração celular", "Digestão", "Armazenar energia"],
-        correct: 0
-      },
-      {
-        question: "O que representa a tabela periódica?",
-        answers: [
-          "Classificação dos elementos químicos",
-          "Organização de números inteiros",
-          "Sistema métrico",
-          "Gráfico de temperatura"
-        ],
-        correct: 0
-      },
-      {
-        question: "Qual foi o estopim da Primeira Guerra Mundial?",
-        answers: [
-          "Assassinato do arquiduque Francisco Ferdinando",
-          "Invasão da Polônia",
-          "Queda da bolsa de Nova York",
-          "Revolução Francesa"
-        ],
-        correct: 0
-      },
-      {
-        question: "O que é um número primo?",
-        answers: [
-          "Número divisível apenas por 1 e por ele mesmo",
-          "Número par",
-          "Número ímpar",
-          "Número múltiplo de 10"
-        ],
-        correct: 0
-      },
-      {
-        question: "Quem escreveu 'Dom Casmurro'?",
-        answers: ["Machado de Assis", "José de Alencar", "Clarice Lispector", "Manuel Bandeira"],
-        correct: 0
-      },
-      {
-        question: "O que é fotossíntese?",
-        answers: [
-          "Processo de produção de energia pelas plantas",
-          "Formação de nuvens",
-          "Respiração celular animal",
-          "Reprodução das células"
-        ],
-        correct: 0
-      },
-      {
-        question: "Qual é a diferença entre massa e peso?",
-        answers: [
-          "Massa é constante, peso depende da gravidade",
-          "Peso é constante, massa depende da altura",
-          "Ambos são iguais",
-          "Peso é a medida em kg, massa em N"
-        ],
-        correct: 0
-      },
-      {
-        question: "O que foi o Iluminismo?",
-        answers: [
-          "Movimento filosófico que valorizava a razão",
-          "Período da escravidão africana",
-          "Início da Idade Média",
-          "Conquista do Brasil pelos portugueses"
-        ],
-        correct: 0
-      }
+      { question: "Qual é a fórmula de Bhaskara?", answers: ["x = (-b ± √(b² - 4ac)) / 2a", "x = b² - 4ac", "x = a² + b²", "x = a + b / c"], correct: 0 },
+      { question: "Quem proclamou a independência do Brasil?", answers: ["Dom Pedro I", "Tiradentes", "Getúlio Vargas", "Dom João VI"], correct: 0 },
+      { question: "O que é um advérbio?", answers: ["Palavra que modifica um verbo, adjetivo ou outro advérbio", "Palavra que nomeia objetos", "Palavra que substitui o nome", "Palavra que indica ação"], correct: 0 },
+      { question: "Qual é a capital do Tocantins?", answers: ["Palmas", "Boa Vista", "Macapá", "Porto Velho"], correct: 0 },
+      { question: "Qual é a função principal dos ribossomos?", answers: ["Produção de proteínas", "Respiração celular", "Digestão", "Armazenar energia"], correct: 0 },
+      { question: "O que representa a tabela periódica?", answers: ["Classificação dos elementos químicos", "Organização de números inteiros", "Sistema métrico", "Gráfico de temperatura"], correct: 0 },
+      { question: "Qual foi o estopim da Primeira Guerra Mundial?", answers: ["Assassinato do arquiduque Francisco Ferdinando", "Invasão da Polônia", "Queda da bolsa de Nova York", "Revolução Francesa"], correct: 0 },
+      { question: "O que é um número primo?", answers: ["Número divisível apenas por 1 e por ele mesmo", "Número par", "Número ímpar", "Número múltiplo de 10"], correct: 0 },
+      { question: "Quem escreveu 'Dom Casmurro'?", answers: ["Machado de Assis", "José de Alencar", "Clarice Lispector", "Manuel Bandeira"], correct: 0 },
+      { question: "O que é fotossíntese?", answers: ["Processo de produção de energia pelas plantas", "Formação de nuvens", "Respiração celular animal", "Reprodução das células"], correct: 0 },
+      { question: "Qual é a diferença entre massa e peso?", answers: ["Massa é constante, peso depende da gravidade", "Peso é constante, massa depende da altura", "Ambos são iguais", "Peso é a medida em kg, massa em N"], correct: 0 },
+      { question: "O que foi o Iluminismo?", answers: ["Movimento filosófico que valorizava a razão", "Período da escravidão africana", "Início da Idade Média", "Conquista do Brasil pelos portugueses"], correct: 0 }
     ];
 
-    // Função para tocar som (Web Audio API)
     function playSound(freq, duration = 200) {
       const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
       const oscillator = audioCtx.createOscillator();
       const gainNode = audioCtx.createGain();
-
       oscillator.connect(gainNode);
       gainNode.connect(audioCtx.destination);
-
       oscillator.type = 'sine';
       oscillator.frequency.setValueAtTime(freq, audioCtx.currentTime);
       gainNode.gain.setValueAtTime(0.1, audioCtx.currentTime);
-
       oscillator.start();
       oscillator.stop(audioCtx.currentTime + duration / 1000);
     }
@@ -207,12 +127,16 @@
     const result = document.getElementById("result");
     const scoreEl = document.getElementById("score");
     const message = document.getElementById("message");
+    const timerEl = document.getElementById("timer");
 
     let currentQuestion = 0;
     let score = 0;
     let answered = false;
+    let quizEnded = false;
 
     function showQuestion() {
+      if (quizEnded) return;
+
       quiz.innerHTML = "";
       nextBtn.classList.add("hide");
       answered = false;
@@ -230,18 +154,18 @@
         answerBtn.type = "button";
 
         answerBtn.addEventListener("click", () => {
-          if (answered) return;
+          if (answered || quizEnded) return;
           answered = true;
 
           const buttons = document.querySelectorAll(".answer");
           buttons.forEach((btn, i) => {
             btn.disabled = true;
             if (i === q.correct) {
-              btn.style.backgroundColor = "#28a745"; // verde para correta
+              btn.style.backgroundColor = "#28a745";
               btn.style.color = "white";
             }
             if (btn === answerBtn && i !== q.correct) {
-              btn.style.backgroundColor = "#dc3545"; // vermelho para errada
+              btn.style.backgroundColor = "#dc3545";
               btn.style.color = "white";
             }
           });
@@ -261,6 +185,7 @@
     }
 
     nextBtn.addEventListener("click", () => {
+      if (quizEnded) return;
       currentQuestion++;
       if (currentQuestion < quizData.length) {
         showQuestion();
@@ -270,24 +195,7 @@
     });
 
     function showResult() {
+      quizEnded = true;
       quiz.classList.add("hide");
       nextBtn.classList.add("hide");
-      result.classList.remove("hide");
-      scoreEl.textContent = score;
-
-      if (score === quizData.length) {
-        message.textContent = "Parabéns! Você acertou todas! 🎉";
-      } else if (score >= quizData.length * 0.75) {
-        message.textContent = "Muito bem! Você foi ótimo!";
-      } else if (score >= quizData.length * 0.4) {
-        message.textContent = "Bom esforço! Mas dá pra melhorar.";
-      } else {
-        message.textContent = "Vamos estudar mais? Você consegue!";
-      }
-    }
-
-    showQuestion();
-  </script>
-
-</body>
-</html>
+      result.classList.remove("
