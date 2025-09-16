@@ -1,72 +1,65 @@
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f4;
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    background: linear-gradient(135deg, #a8dadc 0%, #457b9d 100%);
     margin: 0;
     color: #333;
-    line-height: 1.6;
 }
 
 .quiz-container {
     background-color: #fff;
-    padding: 40px;
-    border-radius: 15px;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-    text-align: center;
-    max-width: 700px;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
     width: 90%;
-    margin: 20px;
-    box-sizing: border-box;
+    max-width: 600px;
+    text-align: center;
 }
 
 h1 {
-    color: #1d3557;
-    margin-bottom: 30px;
-    font-size: 2.5em;
-    font-weight: 700;
+    color: #007bff;
+    margin-bottom: 20px;
 }
 
-h2 {
-    color: #1d3557;
-    margin-bottom: 25px;
-    font-size: 1.8em;
+.screen {
+    margin-top: 20px;
+}
+
+.hidden {
+    display: none;
 }
 
 #question-text {
-    font-size: 1.5em;
-    margin-bottom: 30px;
-    color: #333;
+    font-size: 1.4em;
+    margin-bottom: 25px;
+    line-height: 1.5;
 }
 
-#options-container {
-    display: flex;
-    flex-direction: column;
+.options-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Duas colunas */
     gap: 15px;
     margin-bottom: 30px;
 }
 
 .option-btn {
-    display: block;
-    width: 100%;
-    padding: 18px 20px;
-    border: 2px solid #a8dadc;
+    background-color: #e9ecef;
+    color: #333;
+    border: 1px solid #ced4da;
+    padding: 15px 20px;
     border-radius: 8px;
-    background-color: #f1faee;
-    font-size: 1.2em;
+    font-size: 1.1em;
     cursor: pointer;
     transition: all 0.3s ease;
-    color: #1d3557;
-    text-align: left;
-    outline: none;
+    text-align: left; /* Alinha o texto das opções à esquerda */
 }
 
 .option-btn:hover:not(:disabled) {
-    background-color: #e0f2f7;
-    border-color: #457b9d;
-    transform: translateY(-2px);
+    background-color: #d6eaff;
+    border-color: #007bff;
 }
 
 .option-btn:disabled {
@@ -75,47 +68,12 @@ h2 {
 }
 
 .option-btn.correct {
-    background-color: #d4edda; /* Light green */
-    border-color: #28a745; /* Green */
-    color: #155724; /* Dark green text */
-    font-weight: bold;
+    background-color: #28a745;
+    color: white;
+    border-color: #28a745;
 }
 
 .option-btn.incorrect {
-    background-color: #f8d7da; /* Light red */
-    border-color: #dc3545; /* Red */
-    color: #721c24; /* Dark red text */
-    font-weight: bold;
-}
-
-#next-btn, #restart-btn {
-    padding: 15px 30px;
-    font-size: 1.3em;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.2s ease;
-    margin-top: 20px;
-    font-weight: bold;
-    letter-spacing: 0.5px;
-}
-
-#next-btn {
-    background-color: #457b9d;
-    color: #fff;
-}
-
-#next-btn:hover:not(:disabled) {
-    background-color: #1d3557;
-    transform: translateY(-2px);
-}
-
-#next-btn:disabled {
-    background-color: #ccc;
-    cursor: not-allowed;
-    opacity: 0.6;
-}
-
-#restart-btn {
-    background-color: #e63946;
-    color: #
+    background-color: #dc3545;
+    color: white;
+    border-color: #
