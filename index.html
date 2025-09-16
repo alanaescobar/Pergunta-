@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Ensino Médio</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="quiz-container">
+        <h1>Desafio Ensino Médio!</h1>
+        <div id="question-area">
+            <h2 id="question-text">Carregando pergunta...</h2>
+            <div id="options-container">
+                <button class="option-btn" data-option="a">Opção A</button>
+                <button class="option-btn" data-option="b">Opção B</button>
+                <button class="option-btn" data-option="c">Opção C</button>
+                <button class="option-btn" data-option="d">Opção D</button>
+            </div>
+            <button id="next-btn">Próxima Pergunta</button>
+        </div>
+        <div id="result-area" style="display: none;">
+            <h2>Quiz Finalizado!</h2>
+            <p>Sua pontuação: <span id="score">0</span> de 12</p>
+            <button id="restart-btn">Jogar Novamente</button>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
