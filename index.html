@@ -7,21 +7,24 @@
   <style>
     body {
       font-family: Arial, sans-serif;
-      background-color: #f0f2f5;
-      margin: 0; padding: 0;
+      background-color: #007BFF; /* azul */
+      margin: 0; 
+      padding: 0;
       display: flex;
       justify-content: center;
       align-items: center;
       height: 100vh;
+      color: white; /* texto branco para contraste */
     }
     .quiz-container {
-      background: white;
+      background: #1a73e8; /* azul mais escuro para o container */
       padding: 30px;
       border-radius: 10px;
       max-width: 600px;
       width: 100%;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      box-shadow: 0 2px 10px rgba(0,0,0,0.3);
       text-align: center;
+      color: white;
     }
     h1, h2 {
       margin-bottom: 20px;
@@ -31,7 +34,7 @@
       margin: 10px auto;
       padding: 10px 20px;
       font-size: 16px;
-      background-color: #3498db;
+      background-color: #3399ff; /* azul claro */
       color: white;
       border: none;
       border-radius: 5px;
@@ -40,25 +43,32 @@
       transition: background-color 0.3s ease;
     }
     button:hover:not(:disabled) {
-      background-color: #2980b9;
+      background-color: #2672d2; /* azul hover */
     }
     button.answer {
-      background-color: #ecf0f1;
-      color: #333;
-      border: 1px solid #ccc;
+      background-color: #4da6ff; /* azul intermediário */
+      color: white;
+      border: none;
       margin: 8px 0;
       cursor: pointer;
       min-width: 100%;
+      font-weight: bold;
     }
     button.answer:hover:not(:disabled) {
-      background-color: #d0d7de;
+      background-color: #3399ff;
     }
     button.answer:disabled {
       cursor: default;
-      opacity: 0.6;
+      opacity: 0.7;
     }
     .hide {
       display: none;
+    }
+    #result button {
+      background-color: #28a745; /* verde para tentar novamente */
+    }
+    #result button:hover {
+      background-color: #218838;
     }
   </style>
 </head>
@@ -175,6 +185,23 @@
       }
     ];
 
+    // Função para tocar som (Web Audio API)
+    function playSound(freq, duration = 200) {
+      const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      const oscillator = audioCtx.createOscillator();
+      const gainNode = audioCtx.createGain();
+
+      oscillator.connect(gainNode);
+      gainNode.connect(audioCtx.destination);
+
+      oscillator.type = 'sine';
+      oscillator.frequency.setValueAtTime(freq, audioCtx.currentTime);
+      gainNode.gain.setValueAtTime(0.1, audioCtx.currentTime);
+
+      oscillator.start();
+      oscillator.stop(audioCtx.currentTime + duration / 1000);
+    }
+
     const quiz = document.getElementById("quiz");
     const nextBtn = document.getElementById("next-btn");
     const result = document.getElementById("result");
@@ -186,18 +213,16 @@
     let answered = false;
 
     function showQuestion() {
-      quiz.innerHTML = ""; // limpa questão anterior
+      quiz.innerHTML = "";
       nextBtn.classList.add("hide");
       answered = false;
 
       const q = quizData[currentQuestion];
 
-      // Cria elemento da pergunta
       const questionEl = document.createElement("h2");
       questionEl.textContent = q.question;
       quiz.appendChild(questionEl);
 
-      // Cria botões das alternativas
       q.answers.forEach((answerText, index) => {
         const answerBtn = document.createElement("button");
         answerBtn.classList.add("answer");
@@ -212,18 +237,22 @@
           buttons.forEach((btn, i) => {
             btn.disabled = true;
             if (i === q.correct) {
-              btn.style.backgroundColor = "#2ecc71"; // verde para correta
+              btn.style.backgroundColor = "#28a745"; // verde para correta
               btn.style.color = "white";
             }
             if (btn === answerBtn && i !== q.correct) {
-              btn.style.backgroundColor = "#e74c3c"; // vermelho para errada
+              btn.style.backgroundColor = "#dc3545"; // vermelho para errada
               btn.style.color = "white";
             }
           });
 
           if (index === q.correct) {
             score++;
+            playSound(880, 300);
+          } else {
+            playSound(220, 500);
           }
+
           nextBtn.classList.remove("hide");
         });
 
@@ -257,7 +286,6 @@
       }
     }
 
-    // Inicia o quiz mostrando a primeira pergunta
     showQuestion();
   </script>
 
