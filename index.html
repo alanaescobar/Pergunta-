@@ -1,24 +1,27 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Quiz Ensino Médio</title>
-  <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8"> <!-- ✅ Correto -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- ✅ Responsivo -->
+  <title>Quiz Ensino Médio</title> <!-- ✅ Título da aba -->
+  <link rel="stylesheet" href="style.css"> <!-- ⚠️ Verifique se o arquivo style.css está no mesmo local -->
 </head>
 <body>
   <div class="quiz-container">
-    <h1>Quiz sobre o Ensino Médio 🎓</h1>
-    <div id="quiz"></div>
-    <button id="next-btn" class="hide">Próxima Pergunta</button>
-    <div id="result" class="hide">
+    <h1>Quiz sobre o Ensino Médio 🎓</h1> <!-- ✅ Título do quiz -->
+
+    <div id="quiz"></div> <!-- ✅ Aqui vão aparecer as perguntas via JS -->
+
+    <button id="next-btn" class="hide">Próxima Pergunta</button> <!-- ✅ Botão de próxima pergunta, escondido no início -->
+
+    <div id="result" class="hide"> <!-- ✅ Área de resultado final, escondida inicialmente -->
       <h2>Sua Pontuação: <span id="score"></span>/12</h2>
       <p id="message"></p>
-      <button onclick="location.reload()">Tentar Novamente</button>
+      <button onclick="location.reload()">Tentar Novamente</button> <!-- ✅ Recarrega a página -->
     </div>
   </div>
 
-  <!-- ⚠️ Esta linha importa o JavaScript -->
-  <script src="script.js"></script>
+  <!-- ✅ Importação do script que controla o quiz -->
+  <script src="script.js"></script> <!-- ⚠️ Verifique se script.js está na mesma pasta -->
 </body>
 </html>
