@@ -58,42 +58,84 @@ const questions = [
 
 let currentQuestionIndex = 0;
 let score = 0;
+let answeredCurrentQuestion = false; // Variável para controlar se a pergunta atual já foi respondida
 
+// Função para carregar a pergunta atual
 function loadQuestion() {
     const question = questions[currentQuestionIndex];
     document.getElementById('question').innerText = question.question;
 
     const answersContainer = document.getElementById('answers');
-    answersContainer.innerHTML = '';
+    answersContainer.innerHTML = ''; // Limpa as respostas anteriores
+
+    // Reseta o estado de resposta para a nova pergunta
+    answeredCurrentQuestion = false;
+    document.getElementById('next-button').disabled = true; // Desabilita o botão "Próximo" até que uma resposta seja selecionada
 
     question.options.forEach((option, index) => {
         const answerElement = document.createElement('div');
         answerElement.classList.add('answer');
         answerElement.innerText = option;
-        answerElement.onclick = () => checkAnswer(index);
+        // Adiciona um listener para o clique que chama `checkAnswer`
+        answerElement.onclick = () => checkAnswer(index, answerElement);
         answersContainer.appendChild(answerElement);
     });
+
+    // Atualiza a pontuação exibida (caso o usuário volte ou reinicie o quiz)
+    document.getElementById('score').innerText = `Pontuação: ${score}`;
 }
 
-function checkAnswer(selectedIndex) {
+// Função para verificar a resposta selecionada
+function checkAnswer(selectedIndex, selectedElement) {
+    // Se a pergunta atual já foi respondida, não faz nada (previne múltiplas seleções)
+    if (answeredCurrentQuestion) {
+        return;
+    }
+
+    answeredCurrentQuestion = true; // Marca a pergunta como respondida
     const correctAnswerIndex = questions[currentQuestionIndex].answer;
+    const allAnswerElements = document.querySelectorAll('.answer');
+
+    // Remove event listeners de todas as opções para evitar que o usuário clique novamente
+    allAnswerElements.forEach(element => {
+        element.onclick = null;
+    });
+
     if (selectedIndex === correctAnswerIndex) {
         score++;
-        document.getElementById('score').innerText = `Pontuação: ${score}`;
+        selectedElement.classList.add('correct'); // Adiciona classe para estilizar a resposta correta
+    } else {
+        selectedElement.classList.add('incorrect'); // Adiciona classe para estilizar a resposta incorreta
+        // Opcional: Mostra qual era a resposta correta
+        allAnswerElements[correctAnswerIndex].classList.add('correct-feedback');
     }
-    document.getElementById('next-button').disabled = false;
+
+    document.getElementById('score').innerText = `Pontuação: ${score}`;
+    document.getElementById('next-button').disabled = false; // Habilita o botão "Próximo"
 }
 
+// Função para avançar para a próxima pergunta ou finalizar o quiz
 function nextQuestion() {
     currentQuestionIndex++;
     if (currentQuestionIndex < questions.length) {
-        loadQuestion();
-        document.getElementById('next-button').disabled = true;
+        loadQuestion(); // Carrega a próxima pergunta
     } else {
+        // Quiz finalizado
         document.getElementById('question').innerText = "Quiz finalizado! Você acertou " + score + " de " + questions.length + " perguntas.";
-        document.getElementById('answers').innerHTML = '';
-        document.getElementById('next-button').style.display = 'none';
+        document.getElementById('answers').innerHTML = ''; // Limpa as opções
+        document.getElementById('next-button').style.display = 'none'; // Esconde o botão "Próximo"
+        // Opcional: Adicionar um botão para reiniciar o quiz
+        // const restartButton = document.createElement('button');
+        // restartButton.innerText = 'Reiniciar Quiz';
+        // restartButton.onclick = () => {
+        //     currentQuestionIndex = 0;
+        //     score = 0;
+        //     document.getElementById('next-button').style.display = 'block';
+        //     loadQuestion();
+        // };
+        // document.getElementById('quiz-container').appendChild(restartButton);
     }
 }
 
+// Garante que a primeira pergunta seja carregada quando a página terminar de carregar
 window.onload = loadQuestion;
