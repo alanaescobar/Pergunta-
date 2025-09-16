@@ -3,125 +3,192 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quiz Ensino Médio</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Meu Quiz Incrível!</title>
+    <style>
+        /* Estilos básicos para o corpo da página */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh; /* Garante que o quiz ocupe a altura total da tela */
+            background-color: #f0f2f5; /* Um cinza claro para o fundo */
+            margin: 0;
+            padding: 20px; /* Adiciona um pequeno padding para telas menores */
+            box-sizing: border-box; /* Garante que padding não cause overflow */
+        }
+
+        /* Container principal do quiz */
+        #quiz-container {
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1); /* Sombra mais suave */
+            width: 100%;
+            max-width: 650px; /* Largura máxima para o quiz */
+            text-align: center;
+            border: 1px solid #e0e0e0;
+        }
+
+        /* Título do quiz */
+        h1 {
+            color: #2c3e50; /* Cor escura para o título */
+            margin-bottom: 25px;
+            font-size: 2.2em;
+        }
+
+        /* Estilo para a pergunta */
+        #question {
+            font-size: 1.6em;
+            margin-bottom: 30px;
+            color: #34495e; /* Um tom de azul escuro para a pergunta */
+            font-weight: 500;
+        }
+
+        /* Container das opções de resposta */
+        #answers {
+            display: flex;
+            flex-direction: column;
+            gap: 15px; /* Espaço entre as opções */
+            margin-bottom: 30px;
+        }
+
+        /* Estilo individual de cada opção de resposta */
+        .answer {
+            background-color: #ecf0f1; /* Fundo cinza claro para as opções */
+            padding: 16px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease, border-color 0.3s ease;
+            font-size: 1.15em;
+            color: #34495e;
+            border: 1px solid #bdc3c7; /* Borda sutil */
+            text-align: left; /* Alinha o texto à esquerda */
+        }
+
+        .answer:hover {
+            background-color: #dfe6e9; /* Fundo um pouco mais escuro ao passar o mouse */
+            transform: translateY(-2px); /* Efeito de "levantar" */
+            border-color: #95a5a6;
+        }
+
+        /* Estilo para resposta correta */
+        .answer.correct {
+            background-color: #d4edda; /* Verde suave */
+            border-color: #28a745; /* Borda verde mais forte */
+            color: #155724;
+            pointer-events: none; /* Desabilita clique após a resposta */
+        }
+
+        /* Estilo para resposta incorreta */
+        .answer.incorrect {
+            background-color: #f8d7da; /* Vermelho suave */
+            border-color: #dc3545; /* Borda vermelha mais forte */
+            color: #721c24;
+            pointer-events: none; /* Desabilita clique após a resposta */
+        }
+
+        /* Estilo para feedback visual da resposta correta quando o usuário erra */
+        .answer.correct-feedback {
+            background-color: #cce5ff; /* Azul claro */
+            border-color: #007bff; /* Borda azul */
+            color: #004085;
+            animation: pulseCorrect 1s infinite alternate; /* Animação sutil */
+        }
+
+        @keyframes pulseCorrect {
+            from { opacity: 1; }
+            to { opacity: 0.7; }
+        }
+
+        /* Estilo para o botão "Próximo" */
+        #next-button {
+            background-color: #3498db; /* Azul vibrante */
+            color: white;
+            padding: 14px 25px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.2em;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            width: 100%;
+            max-width: 200px; /* Largura fixa para o botão */
+            margin-top: 20px;
+        }
+
+        #next-button:hover:not(:disabled) {
+            background-color: #2980b9; /* Azul mais escuro ao passar o mouse */
+            transform: translateY(-2px);
+        }
+
+        #next-button:disabled {
+            background-color: #cccccc; /* Cinza para botão desabilitado */
+            cursor: not-allowed;
+            opacity: 0.7;
+        }
+
+        /* Estilo para a pontuação */
+        #score {
+            font-size: 1.3em;
+            color: #555;
+            margin-top: 25px;
+            font-weight: bold;
+        }
+
+        /* Media Queries para responsividade */
+        @media (max-width: 768px) {
+            #quiz-container {
+                padding: 20px;
+                margin: 10px;
+            }
+            h1 {
+                font-size: 1.8em;
+            }
+            #question {
+                font-size: 1.3em;
+            }
+            .answer {
+                font-size: 1em;
+                padding: 12px 15px;
+            }
+            #next-button {
+                font-size: 1.1em;
+                padding: 12px 20px;
+            }
+            #score {
+                font-size: 1.1em;
+            }
+        }
+
+        @media (max-width: 480px) {
+            #quiz-container {
+                padding: 15px;
+                margin: 5px;
+            }
+            h1 {
+                font-size: 1.5em;
+            }
+            #question {
+                font-size: 1.1em;
+            }
+            .answer {
+                font-size: 0.95em;
+                padding: 10px 12px;
+            }
+            #next-button {
+                font-size: 1em;
+                padding: 10px 15px;
+                max-width: 150px;
+            }
+            #score {
+                font-size: 1em;
+            }
+        }
+    </style>
 </head>
 <body>
-    <div class="quiz-container">
-        <h1>Quiz Ensino Médio</h1>
-        <div id="question-container">
-            <p id="question">Carregando...</p>
-            <div id="options-container" class="options">
-        </div>
-        <button id="next-button" onclick="nextQuestion()">Próxima Pergunta</button>
-        <p id="score">Pontuação: 0</p>
-    </div>
-    <div id="result-container" style="display: none;">
-     <h2>Quiz Finalizado!</h2>
- <p>Você acertou <span id="score">0</span> de <span id="total-questions">10</span> perguntas.</p>
-  <button id="restart-button">Jogar Novamente</button>
-   </div>
-    </div> 
 
-    <script> 
-    // Este é o código JavaScript com as perguntas, agora dentro do index.html 
-    // const questions = [
-    const questions= [
-    {
-        question: "Quem foi o primeiro presidente do Brasil?",
-        options: ["Getúlio Vargas", "Juscelino Kubitschek", "Marechal Deodoro", "Luiz Inácio Lula da Silva"],
-        answer: 2
-    },
-    {
-        question: "Qual é a fórmula química da água?",
-        options: ["CO2", "H2O", "NaCl", "O2"],
-        answer: 1
-    },
-    {
-        question: "Quem escreveu 'Dom Casmurro'?",
-        options: ["Machado de Assis", "José de Alencar", "Monteiro Lobato", "Clarice Lispector"],
-        answer: 0
-    },
-    {
-        question: "Qual a capital da França?",
-        options: ["Londres", "Roma", "Paris", "Berlim"],
-        answer: 2
-    },
-    {
-        question: "O que é a fotossíntese?",
-        options: [
-            "Transformação de luz em energia",
-            "Respiração das plantas",
-            "Processo de digestão das plantas",
-            "Processo de reprodução das plantas"
-        ],
-        answer: 0
-    },
-    {
-        question: "Quem descobriu a teoria da evolução das espécies?",
-        options: ["Galileu Galilei", "Charles Darwin", "Isaac Newton", "Albert Einstein"],
-        answer: 1
-    },
-    {
-        question: "Em que ano o Brasil se tornou independente?",
-        options: ["1822", "1889", "1900", "1500"],
-        answer: 0
-    },
-    {
-        question: "Qual é a capital do Japão?",
-        options: ["Pequim", "Seul", "Tóquio", "Bangkok"],
-        answer: 2
-    },
-    {
-        question: "Qual é o maior continente do mundo?",
-        options: ["África", "Ásia", "América", "Antártica"],
-        answer: 1
-    },
-    {
-        question: "Qual é o elemento químico representado pelo símbolo O?",
-        options: ["Oxigênio", "Ouro", "Ósmio", "Osmose"],
-        answer: 0
-    }
-];
-
-let currentQuestionIndex = 0;
-let score = 0;
-
-function loadQuestion() {
-    const question = questions[currentQuestionIndex];
-    document.getElementById('question').innerText = question.question;
-
-    const answersContainer = document.getElementById('answers');
-    answersContainer.innerHTML = '';
-
-    question.options.forEach((option, index) => {
-        const answerElement = document.createElement('div');
-        answerElement.classList.add('answer');
-        answerElement.innerText = option;
-        answerElement.onclick = () => checkAnswer(index);
-        answersContainer.appendChild(answerElement);
-    });
-}
-
-function checkAnswer(selectedIndex) {
-    const correctAnswerIndex = questions[currentQuestionIndex].answer;
-    if (selectedIndex === correctAnswerIndex) {
-        score++;
-        document.getElementById('score').innerText = `Pontuação: ${score}`;
-    }
-    document.getElementById('next-button').disabled = false;
-}
-
-function nextQuestion() {
-    currentQuestionIndex++;
-    if (currentQuestionIndex < questions.length) {
-        loadQuestion();
-        document.getElementById('next-button').disabled = true;
-    } else {
-        document.getElementById('question').innerText = "Quiz finalizado! Você acertou " + score + " de " + questions.length + " perguntas.";
-        document.getElementById('answers').innerHTML = '';
-        document.getElementById('next-button').style.display = 'none';
-    }
-}
-
-window.onload = loadQuestion;
+    <div id="quiz-container">
+        <h1>Teste Seus Conhecimentos!</h1>
+        <p id="question">Carregando pergunta...</p>
+        <div id="answers">
