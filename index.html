@@ -8,20 +8,20 @@
 </head>
 <body>
     <div class="quiz-container">
-        <h1>Desafio Ensino Médio!</h1>
-        <div id="question-area">
+        <h1>Desafio Ensino Médio! 🧠</h1>
+        <div id="quiz-screen">
             <h2 id="question-text">Carregando pergunta...</h2>
             <div id="options-container">
-                <button class="option-btn" data-option="a">Opção A</button>
-                <button class="option-btn" data-option="b">Opção B</button>
-                <button class="option-btn" data-option="c">Opção C</button>
-                <button class="option-btn" data-option="d">Opção D</button>
+                <button class="option-btn" data-option="a"></button>
+                <button class="option-btn" data-option="b"></button>
+                <button class="option-btn" data-option="c"></button>
+                <button class="option-btn" data-option="d"></button>
             </div>
-            <button id="next-btn">Próxima Pergunta</button>
+            <button id="next-btn" disabled>Próxima Pergunta</button>
         </div>
-        <div id="result-area" style="display: none;">
-            <h2>Quiz Finalizado!</h2>
-            <p>Sua pontuação: <span id="score">0</span> de 12</p>
+        <div id="result-screen" style="display: none;">
+            <h2>Quiz Finalizado! 🎉</h2>
+            <p>Você acertou <span id="score">0</span> de <span id="total-questions">12</span> perguntas.</p>
             <button id="restart-btn">Jogar Novamente</button>
         </div>
     </div>
