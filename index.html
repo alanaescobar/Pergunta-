@@ -1,194 +1,22 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Meu Quiz Incrível!</title>
-    <style>
-        /* Estilos básicos para o corpo da página */
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh; /* Garante que o quiz ocupe a altura total da tela */
-            background-color: #f0f2f5; /* Um cinza claro para o fundo */
-            margin: 0;
-            padding: 20px; /* Adiciona um pequeno padding para telas menores */
-            box-sizing: border-box; /* Garante que padding não cause overflow */
-        }
-
-        /* Container principal do quiz */
-        #quiz-container {
-            background-color: #ffffff;
-            padding: 30px;
-            border-radius: 12px;
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1); /* Sombra mais suave */
-            width: 100%;
-            max-width: 650px; /* Largura máxima para o quiz */
-            text-align: center;
-            border: 1px solid #e0e0e0;
-        }
-
-        /* Título do quiz */
-        h1 {
-            color: #2c3e50; /* Cor escura para o título */
-            margin-bottom: 25px;
-            font-size: 2.2em;
-        }
-
-        /* Estilo para a pergunta */
-        #question {
-            font-size: 1.6em;
-            margin-bottom: 30px;
-            color: #34495e; /* Um tom de azul escuro para a pergunta */
-            font-weight: 500;
-        }
-
-        /* Container das opções de resposta */
-        #answers {
-            display: flex;
-            flex-direction: column;
-            gap: 15px; /* Espaço entre as opções */
-            margin-bottom: 30px;
-        }
-
-        /* Estilo individual de cada opção de resposta */
-        .answer {
-            background-color: #ecf0f1; /* Fundo cinza claro para as opções */
-            padding: 16px 20px;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: background-color 0.3s ease, transform 0.2s ease, border-color 0.3s ease;
-            font-size: 1.15em;
-            color: #34495e;
-            border: 1px solid #bdc3c7; /* Borda sutil */
-            text-align: left; /* Alinha o texto à esquerda */
-        }
-
-        .answer:hover {
-            background-color: #dfe6e9; /* Fundo um pouco mais escuro ao passar o mouse */
-            transform: translateY(-2px); /* Efeito de "levantar" */
-            border-color: #95a5a6;
-        }
-
-        /* Estilo para resposta correta */
-        .answer.correct {
-            background-color: #d4edda; /* Verde suave */
-            border-color: #28a745; /* Borda verde mais forte */
-            color: #155724;
-            pointer-events: none; /* Desabilita clique após a resposta */
-        }
-
-        /* Estilo para resposta incorreta */
-        .answer.incorrect {
-            background-color: #f8d7da; /* Vermelho suave */
-            border-color: #dc3545; /* Borda vermelha mais forte */
-            color: #721c24;
-            pointer-events: none; /* Desabilita clique após a resposta */
-        }
-
-        /* Estilo para feedback visual da resposta correta quando o usuário erra */
-        .answer.correct-feedback {
-            background-color: #cce5ff; /* Azul claro */
-            border-color: #007bff; /* Borda azul */
-            color: #004085;
-            animation: pulseCorrect 1s infinite alternate; /* Animação sutil */
-        }
-
-        @keyframes pulseCorrect {
-            from { opacity: 1; }
-            to { opacity: 0.7; }
-        }
-
-        /* Estilo para o botão "Próximo" */
-        #next-button {
-            background-color: #3498db; /* Azul vibrante */
-            color: white;
-            padding: 14px 25px;
-            border: none;
-            border-radius: 8px;
-            font-size: 1.2em;
-            cursor: pointer;
-            transition: background-color 0.3s ease, transform 0.2s ease;
-            width: 100%;
-            max-width: 200px; /* Largura fixa para o botão */
-            margin-top: 20px;
-        }
-
-        #next-button:hover:not(:disabled) {
-            background-color: #2980b9; /* Azul mais escuro ao passar o mouse */
-            transform: translateY(-2px);
-        }
-
-        #next-button:disabled {
-            background-color: #cccccc; /* Cinza para botão desabilitado */
-            cursor: not-allowed;
-            opacity: 0.7;
-        }
-
-        /* Estilo para a pontuação */
-        #score {
-            font-size: 1.3em;
-            color: #555;
-            margin-top: 25px;
-            font-weight: bold;
-        }
-
-        /* Media Queries para responsividade */
-        @media (max-width: 768px) {
-            #quiz-container {
-                padding: 20px;
-                margin: 10px;
-            }
-            h1 {
-                font-size: 1.8em;
-            }
-            #question {
-                font-size: 1.3em;
-            }
-            .answer {
-                font-size: 1em;
-                padding: 12px 15px;
-            }
-            #next-button {
-                font-size: 1.1em;
-                padding: 12px 20px;
-            }
-            #score {
-                font-size: 1.1em;
-            }
-        }
-
-        @media (max-width: 480px) {
-            #quiz-container {
-                padding: 15px;
-                margin: 5px;
-            }
-            h1 {
-                font-size: 1.5em;
-            }
-            #question {
-                font-size: 1.1em;
-            }
-            .answer {
-                font-size: 0.95em;
-                padding: 10px 12px;
-            }
-            #next-button {
-                font-size: 1em;
-                padding: 10px 15px;
-                max-width: 150px;
-            }
-            #score {
-                font-size: 1em;
-            }
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Quiz Ensino Médio</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-
-    <div id="quiz-container">
-        <h1>Teste Seus Conhecimentos!</h1>
-        <p id="question">Carregando pergunta...</p>
-        <div id="answers">
+  <div class="quiz-container">
+    <h1>Quiz sobre o Ensino Médio 🎓</h1>
+    <div id="quiz"></div>
+    <button id="next-btn">Próxima Pergunta</button>
+    <div id="result" class="hide">
+      <h2>Sua Pontuação: <span id="score"></span>/12</h2>
+      <p id="message"></p>
+      <button onclick="location.reload()">Tentar Novamente</button>
+    </div>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
