@@ -13,7 +13,7 @@ const questions = [
         subject: "Português"
     },
     {
-        question: "Qual é o resultado de \( \sqrt{144} + 3^2 - 5 \) ?",
+        question: "Qual é o resultado de \\( \\sqrt{144} + 3^2 - 5 \\) ?",
         options: ["16", "12", "18", "14"],
         answer: "16", // 12 + 9 - 5 = 16
         subject: "Matemática"
@@ -169,16 +169,4 @@ function nextQuestion() {
 
 // Função para mostrar o resultado final
 function showResult() {
-    quizScreen.style.display = 'none';
-    resultScreen.style.display = 'block';
-    scoreSpan.textContent = score;
-    totalQuestionsSpan.textContent = questions.length;
-}
-
-// Função para reiniciar o quiz
-function restartQuiz() {
-    currentQuestionIndex = 0;
-    score = 0;
-    shuffleArray(questions); // Embaralha as perguntas novamente para um novo jogo
-    resultScreen.style.display = 'none';
-    quizScreen.style
+    quizScreen.style.display = 'none
