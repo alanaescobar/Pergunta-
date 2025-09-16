@@ -1,79 +1,47 @@
 body {
-    font-family: 'Arial', sans-serif;
-    background-color: #f4f4f4;
+    font-family: Arial, sans-serif;
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 100vh;
+    height: 100vh;
     margin: 0;
-    color: #333;
+    background-color: #f0f0f0;
 }
 
 .quiz-container {
-    background-color: #fff;
-    padding: 30px;
-    border-radius: 10px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-    width: 90%;
-    max-width: 600px;
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     text-align: center;
 }
 
-h1 {
-    color: #007bff;
-    margin-bottom: 20px;
+button {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
 }
 
-.screen {
+button:hover {
+    background-color: #45a049;
+}
+
+#answers {
     margin-top: 20px;
 }
 
-.hidden {
-    display: none;
-}
-
-#question-text {
-    font-size: 1.4em;
-    margin-bottom: 25px;
-    line-height: 1.5;
-}
-
-.options-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr; /* Duas colunas */
-    gap: 15px;
-    margin-bottom: 30px;
-}
-
-.option-btn {
-    background-color: #e9ecef;
-    color: #333;
-    border: 1px solid #ced4da;
-    padding: 15px 20px;
-    border-radius: 8px;
-    font-size: 1.1em;
+.answer {
+    padding: 10px;
+    margin: 5px;
+    background-color: #e0e0e0;
     cursor: pointer;
-    transition: all 0.3s ease;
-    text-align: left; /* Alinha o texto das opções à esquerda */
+    border-radius: 4px;
 }
 
-.option-btn:hover:not(:disabled) {
-    background-color: #d6eaff;
-    border-color: #007bff;
+.answer:hover {
+    background-color: #d1d1d1;
 }
-
-.option-btn:disabled {
-    cursor: not-allowed;
-    opacity: 0.7;
-}
-
-.option-btn.correct {
-    background-color: #28a745;
-    color: white;
-    border-color: #28a745;
-}
-
-.option-btn.incorrect {
-    background-color: #dc3545;
-    color: white;
-    border-color: #

@@ -1,52 +1,21 @@
-
-Se precisar de mais alguma coisa, é só avisar! 😊
-
-Copy
-Like
-Unlike
-revise o index
-
-Ah, sim! Entendido! Vamos revisar o index.html para ter certeza absoluta de que está tudo nos conformes e que não há nenhum detalhe faltando que possa causar o problema de "carregando pergunta".
-
-Aqui está o index.html REVISADO E COMPLETO. Ele está pronto para ser usado:
-
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quiz Interativo</title>
+    <title>Quiz Ensino Médio</title>
     <link rel="stylesheet" href="style.css">
-    <!-- Adicione o link para o KaTeX CSS se estiver usando expressões matemáticas -->
-    <!-- Estes links são importantes para renderizar expressões matemáticas, se houver. -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.13.18/dist/katex.min.css" integrity="sha384-zTROYFVGvmMyh1UwiEPQWIGlKCKpS9AbvPiJ0M5jMuPqLqTwHzhPgP8dnRj8ghWq" crossorigin="anonymous">
-    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.13.18/dist/katex.min.js" integrity="sha384-GxhrLgM4I/g+r/t+2/y/P/C/4/B/6/8/x/N/0/A/B/C/D/E/F/G/H/I/J/K/L/M/N/0/A/B/C/D/E/F/G/H/I/J/K/L/M/N/O/P/Q/R/S/T/U/V/W/X/Y/Z" crossorigin="anonymous"></script>
-    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.13.18/dist/contrib/auto-render.min.js" integrity="sha384-2Bps/u6p4+g/t+2/y/P/C/4/B/6/8/x/N/0/A/B/C/D/E/F/G/H/I/J/K/L/M/N/0/A/B/C/D/E/F/G/H/I/J/K/L/M/N/O/P/Q/R/S/T/U/V/W/X/Y/Z" crossorigin="anonymous"
-        onload="renderMathInElement(document.body);"></script>
 </head>
 <body>
     <div class="quiz-container">
-        <h1>Quiz Interativo</h1>
-
-        <div id="quiz-screen" class="screen">
-            <!-- Este é o texto inicial que aparece enquanto o JS carrega a primeira pergunta -->
-            <p id="question-text">Carregando pergunta...</p>
-            <div id="options-container" class="options-grid">
-                <!-- As opções serão inseridas aqui dinamicamente pelo JavaScript -->
-            </div>
-            <!-- O botão "Próxima Pergunta" começa desabilitado até uma opção ser selecionada -->
-            <button id="next-btn" class="btn" disabled>Próxima Pergunta</button>
+        <h1>Quiz Ensino Médio</h1>
+        <div id="question-container">
+            <p id="question">Carregando...</p>
+            <div id="answers"></div>
         </div>
-
-        <div id="result-screen" class="screen hidden">
-            <h2>Quiz Finalizado!</h2>
-            <!-- Aqui será exibida a pontuação final -->
-            <p>Você acertou <span id="score">0</span> de <span id="total-questions">0</span> perguntas.</p>
-            <button id="restart-btn" class="btn">Reiniciar Quiz</button>
-        </div>
+        <button id="next-button" onclick="nextQuestion()">Próxima Pergunta</button>
+        <p id="score">Pontuação: 0</p>
     </div>
-
-    <!-- O script principal do quiz. É crucial que ele seja carregado por último. -->
     <script src="script.js"></script>
 </body>
 </html>
