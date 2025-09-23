@@ -93,10 +93,6 @@
     </div>
   </div>
 
-  <!-- Sons de acerto e erro -->
-  <audio id="correct-sound" src="acerto.mp3" preload="auto"></audio>
-  <audio id="wrong-sound" src="erro.mp3" preload="auto"></audio>
-
   <script>
     const quizData = [
       { question: "Qual é a fórmula de Bhaskara?", answers: ["x = (-b ± √(b² - 4ac)) / 2a", "x = b² - 4ac", "x = a² + b²", "x = a + b / c"], correct: 0 },
@@ -113,15 +109,27 @@
       { question: "O que foi o Iluminismo?", answers: ["Movimento filosófico que valorizava a razão", "Período da escravidão africana", "Início da Idade Média", "Conquista do Brasil pelos portugueses"], correct: 0 }
     ];
 
-    // Sons
-    const correctSound = document.getElementById("correct-sound");
-    const wrongSound = document.getElementById("wrong-sound");
+    // Função para gerar sons de acerto e erro
+    function generateSound(frequency, duration) {
+      const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+      const oscillator = audioContext.createOscillator();
+      const gainNode = audioContext.createGain();
+      oscillator.connect(gainNode);
+      gainNode.connect(audioContext.destination);
+      
+      oscillator.type = 'sine';
+      oscillator.frequency.setValueAtTime(frequency, audioContext.currentTime);
+      gainNode.gain.setValueAtTime(0.1, audioContext.currentTime);
+      oscillator.start();
+      oscillator.stop(audioContext.currentTime + duration / 1000);
+    }
 
+    // Sons de acerto e erro
     function playSound(isCorrect) {
       if (isCorrect) {
-        correctSound.play();  // Toca som de acerto
+        generateSound(880, 300);  // Frequência para acerto
       } else {
-        wrongSound.play();  // Toca som de erro
+        generateSound(220, 500);  // Frequência para erro
       }
     }
 
