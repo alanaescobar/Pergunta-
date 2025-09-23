@@ -109,27 +109,27 @@
       { question: "O que foi o Iluminismo?", answers: ["Movimento filosófico que valorizava a razão", "Período da escravidão africana", "Início da Idade Média", "Conquista do Brasil pelos portugueses"], correct: 0 }
     ];
 
-    // Função para gerar sons de acerto e erro com diferentes ondas
-    function generateSound(frequency, duration, waveType) {
+    // Função para gerar sons de acerto e erro com novos sons
+    function generateSound(frequency, duration) {
       const audioContext = new (window.AudioContext || window.webkitAudioContext)();
       const oscillator = audioContext.createOscillator();
       const gainNode = audioContext.createGain();
       oscillator.connect(gainNode);
       gainNode.connect(audioContext.destination);
       
-      oscillator.type = waveType;  // Mudando o tipo de onda
+      oscillator.type = 'sine';  // Tipo de onda simples (senoidal)
       oscillator.frequency.setValueAtTime(frequency, audioContext.currentTime);
       gainNode.gain.setValueAtTime(0.1, audioContext.currentTime);
       oscillator.start();
       oscillator.stop(audioContext.currentTime + duration / 1000);
     }
 
-    // Sons de acerto e erro com diferentes tipos de onda
+    // Sons de acerto e erro com frequências ajustadas
     function playSound(isCorrect) {
       if (isCorrect) {
-        generateSound(500, 300, 'triangle');  // Som de acerto com onda triangular
+        generateSound(1000, 200);  // Som de acerto (beep curto)
       } else {
-        generateSound(200, 500, 'square');  // Som de erro com onda quadrada
+        generateSound(400, 600);  // Som de erro (bip longo)
       }
     }
 
