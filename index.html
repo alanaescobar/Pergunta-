@@ -1,3 +1,13 @@
+Para modificar o som quando a resposta é correta e adicionar um som específico para quando a resposta está errada, você pode ajustar a função `playSound` e definir diferentes frequências ou tons para acertos e erros.
+
+Aqui está uma modificação do código para trocar os sons:
+
+1. **Som de acerto**: A frequência será mais alta (exemplo: 880Hz).
+2. **Som de erro**: A frequência será mais baixa (exemplo: 440Hz).
+
+Aqui está o código modificado com novos sons:
+
+```html
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -110,17 +120,17 @@
     ];
 
     // Som
-    function playSound(freq, duration = 200) {
+    function playSound(isCorrect) {
       const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
       const oscillator = audioCtx.createOscillator();
       const gainNode = audioCtx.createGain();
       oscillator.connect(gainNode);
       gainNode.connect(audioCtx.destination);
       oscillator.type = 'sine';
-      oscillator.frequency.setValueAtTime(freq, audioCtx.currentTime);
+      oscillator.frequency.setValueAtTime(isCorrect ? 880 : 440, audioCtx.currentTime);  // Som de acerto 880Hz, erro 440Hz
       gainNode.gain.setValueAtTime(0.1, audioCtx.currentTime);
       oscillator.start();
-      oscillator.stop(audioCtx.currentTime + duration / 1000);
+      oscillator.stop(audioCtx.currentTime + 0.3); // A duração do som é de 0.3 segundos
     }
 
     const quiz = document.getElementById("quiz");
@@ -172,9 +182,9 @@
 
           if (index === q.correct) {
             score++;
-            playSound(880, 300);
+            playSound(true); // Som de acerto
           } else {
-            playSound(220, 500);
+            playSound(false); // Som de erro
           }
 
           nextBtn.classList.remove("hide");
@@ -190,50 +200,5 @@
       if (currentQuestion < quizData.length) {
         showQuestion();
       } else {
-        showResult();
-      }
-    });
-
-    function showResult() {
-      quizEnded = true;
-      quiz.classList.add("hide");
-      nextBtn.classList.add("hide");
-      result.classList.remove("hide");
-      scoreEl.textContent = score;
-
-      if (score === quizData.length) {
-        message.textContent = "Parabéns! Você acertou todas! 🎉";
-      } else if (score >= quizData.length * 0.75) {
-        message.textContent = "Muito bem! Você foi ótimo!";
-      } else if (score >= quizData.length * 0.4) {
-        message.textContent = "Bom esforço! Mas dá pra melhorar.";
-      } else {
-        message.textContent = "Vamos estudar mais? Você consegue!";
-      }
-    }
-
-    // ⏰ TEMPORIZADOR DE 2 MINUTOS
-    let timeLeft = 120; // 2 minutos = 120 segundos
-    const countdown = setInterval(() => {
-      if (quizEnded) {
-        clearInterval(countdown);
-        return;
-      }
-
-      const minutes = Math.floor(timeLeft / 60);
-      const seconds = timeLeft % 60;
-      timerEl.textContent = `⏳ Tempo restante: ${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
-
-      if (timeLeft <= 0) {
-        clearInterval(countdown);
-        showResult();
-      }
-
-      timeLeft--;
-    }, 1000);
-
-    showQuestion();
-  </script>
-
-</body>
-</html>
+        show
+```
