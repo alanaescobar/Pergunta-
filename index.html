@@ -93,6 +93,10 @@
     </div>
   </div>
 
+  <!-- Sons de acerto e erro -->
+  <audio id="correct-sound" src="acerto.mp3" preload="auto"></audio>
+  <audio id="wrong-sound" src="erro.mp3" preload="auto"></audio>
+
   <script>
     const quizData = [
       { question: "Qual é a fórmula de Bhaskara?", answers: ["x = (-b ± √(b² - 4ac)) / 2a", "x = b² - 4ac", "x = a² + b²", "x = a + b / c"], correct: 0 },
@@ -109,18 +113,16 @@
       { question: "O que foi o Iluminismo?", answers: ["Movimento filosófico que valorizava a razão", "Período da escravidão africana", "Início da Idade Média", "Conquista do Brasil pelos portugueses"], correct: 0 }
     ];
 
-    // Som
+    // Sons
+    const correctSound = document.getElementById("correct-sound");
+    const wrongSound = document.getElementById("wrong-sound");
+
     function playSound(isCorrect) {
-      const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-      const oscillator = audioCtx.createOscillator();
-      const gainNode = audioCtx.createGain();
-      oscillator.connect(gainNode);
-      gainNode.connect(audioCtx.destination);
-      oscillator.type = 'sine';
-      oscillator.frequency.setValueAtTime(isCorrect ? 880 : 440, audioCtx.currentTime);  // Som de acerto 880Hz, erro 440Hz
-      gainNode.gain.setValueAtTime(0.1, audioCtx.currentTime);
-      oscillator.start();
-      oscillator.stop(audioCtx.currentTime + 0.3); // A duração do som é de 0.3 segundos
+      if (isCorrect) {
+        correctSound.play();
+      } else {
+        wrongSound.play();
+      }
     }
 
     const quiz = document.getElementById("quiz");
@@ -172,9 +174,9 @@
 
           if (index === q.correct) {
             score++;
-            playSound(true); // Som de acerto
+            playSound(true); // Acerto
           } else {
-            playSound(false); // Som de erro
+            playSound(false); // Erro
           }
 
           nextBtn.classList.remove("hide");
@@ -190,5 +192,50 @@
       if (currentQuestion < quizData.length) {
         showQuestion();
       } else {
-        show
-```
+        showResult();
+      }
+    });
+
+    function showResult() {
+      quizEnded = true;
+      quiz.classList.add("hide");
+      nextBtn.classList.add("hide");
+      result.classList.remove("hide");
+      scoreEl.textContent = score;
+
+      if (score === quizData.length) {
+        message.textContent = "Parabéns! Você acertou todas! 🎉";
+      } else if (score >= quizData.length * 0.75) {
+        message.textContent = "Muito bem! Você foi ótimo!";
+      } else if (score >= quizData.length * 0.4) {
+        message.textContent = "Bom esforço! Mas dá pra melhorar.";
+      } else {
+        message.textContent = "Vamos estudar mais? Você consegue!";
+      }
+    }
+
+    // ⏰ TEMPORIZADOR DE 2 MINUTOS
+    let timeLeft = 120; // 2 minutos = 120 segundos
+    const countdown = setInterval(() => {
+      if (quizEnded) {
+        clearInterval(countdown);
+        return;
+      }
+
+      const minutes = Math.floor(timeLeft / 60);
+      const seconds = timeLeft % 60;
+      timerEl.textContent = `⏳ Tempo restante: ${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+
+      if (timeLeft <= 0) {
+        clearInterval(countdown);
+        showResult();
+      }
+
+      timeLeft--;
+    }, 1000);
+
+    showQuestion();
+  </script>
+
+</body>
+</html>
